@@ -1,66 +1,153 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Learn how to integrate PlanetScale with a sample Laravel application
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This sample application demonstrates how to connect to a PlanetScale MySQL database.
 
-## About Laravel
+For the full tutorial, see the [Laravel PlanetScale documentation](https://docs.planetscale.com/tutorials/connect-laravel-app).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Prerequisites
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [PHP](https://www.php.net/manual/en/install.php) &mdash; This tutorial uses `v8.1`
+- [Composer](https://getcomposer.org/)
+- A [free PlanetScale account](https://auth.planetscale.com/sign-up)
+- [PlanetScale CLI](https://github.com/planetscale/cli) &mdash; You can also follow this tutorial using just the PlanetScale admin dashboard, but the CLI will make setup quicker. For dashboard instructions, see [the full tutorial](https://docs.planetscale.com/tutorials/connect-laravel-app).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Set up the Laravel app
 
-## Learning Laravel
+1. Clone the starter Laravel application:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+git clone https://github.com/planetscale/laravel-example.git
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Enter into the folder and install the dependencies:
 
-## Laravel Sponsors
+```bash
+cd laravel-example
+composer install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. Copy the `.env.example` file into `.env`:
 
-### Premium Partners
+```bash
+cp .env.example .env
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+4. Start the application:
 
-## Contributing
+```bash
+php artisan serve
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+View the application at [http://localhost:8000](http://localhost:8000).
 
-## Code of Conduct
+## Set up the database
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Authenticate the CLI with the following command:
 
-## Security Vulnerabilities
+```bash
+pscale auth login
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. Create a new database with a default `main` branch with the following command:
 
-## License
+```bash
+pscale database create <DATABASE_NAME> --region <REGION_SLUG>
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This tutorial uses `laravel-example` for `DATABASE_NAME`, but you can use any name with lowercase, alphanumeric characters and dashes or underscores.
+
+For `REGION_SLUG`, choose a region closest to you from the [available regions](/concepts/regions#available-regions) or leave it blank.
+
+## Connect to the Laravel app
+
+There are **two ways to connect** to PlanetScale:
+
+- Using client certificates with the CLI
+- With an auto-generated username and password
+
+Both options are covered below.
+
+### Connect with username and password
+
+1. Create a username and password with the PlanetScale CLI by running:
+
+```bash
+pscale password create <DATABASE_NAME> <BRANCH_NAME> <PASSWORD_NAME>
+```
+
+> Note: `PASSWORD_NAME` represents the name of the username and password being generated. You can have multiple credentials for a branch, so this gives you a way to categorize them.
+
+Take note of the values returned to you, as you won't be able to see them again.
+
+2. Open the `.env` file in your Laravel app, find the database connection section, and fill it in as follows:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=<ACCESS HOST URL> // outputted in the previous step
+DB_PORT=3306
+DB_DATABASE=<DATABASE_NAME> // this tutorial uses 'laravel-example'
+DB_USERNAME=<USERNAME> // outputted in the previous step
+DB_PASSWORD=<PLAIN TEXT> // outputted in the previous step
+MYSQL_ATTR_SSL_CA=/etc/ssl/cert.pem
+```
+
+Refresh your Laravel homepage and you should see the message that you're connected to your database!
+
+### Connect with client certificates
+
+To connect with client certificates, you'll need the [PlanetScale CLI](https://github.com/planetscale/cli).
+
+1. Open a connection by running the following:
+
+```bash
+pscale connect <DATABASE_NAME> <BRANCH_NAME>
+```
+
+The default branch is `main`.
+
+2. A secure connection to your database will be established and you'll see a local address you can use to connect to your application.
+
+3. Open the `.env` file in your Laravel app and update it as follows:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306 // Get this from the output of the previous step
+DB_DATABASE=<DATABASE_NAME>
+DB_USERNAME=
+DB_PASSWORD=
+```
+
+The connection uses port `3306` by default, but if that's being used, it will pick a random port. Make sure you paste in whatever port is returned in the terminal. You can leave `DB_USERNAME` and `DB_PASSWORD` blank.
+
+Refresh your Laravel homepage and you should see the message that you're connected to your database!
+
+## Run migrations and seeder
+
+Now that you're connected, let's add some data to see it in action. The sample application comes with a migration file at `database/migrations/2021_12_20_194637_create_stars_table.php` that will create a `stars` table in the database. There's also a `database/seeders/StarSeeder.php` file that will add two rows to the `stars` table. Let's run those now.
+
+1. Make sure your database connection has been established. You'll see the message "You are connected to your-database-name" on the [Laravel app homepage](http://localhost:8000/) if everything is configured properly.
+
+2. In the root of the Laravel project, run the following to run migrations:
+
+```bash
+php artisan migrate
+```
+
+3. Seed the database by running:
+
+```bash
+php artisan db:seed
+```
+
+You should get the message "Database seeding completed successfully".
+
+4. Refresh your Laravel homepage and you'll see a list of stars and their constellations printed out.
+
+The `resources/views/home.blade.php` file pulls this data from the `stars` table with the help of the `app/Http/Controllers/StarController.php` file.
+
+## Need help?
+
+For more information about adding data, check out the full [Laravel PlanetScale documentation](https://docs.planetscale.com/tutorials/connect-laravel-app).
+
+If you need further assistance, you can reach out to [PlanetScale's support team](https://www.planetscale.com/support), or join our [GitHub Discussion board](https://github.com/planetscale/beta/discussions) to see how others are using PlanetScale.
