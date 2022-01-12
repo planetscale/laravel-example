@@ -2,7 +2,7 @@
 
 This sample application demonstrates how to connect to a PlanetScale MySQL database, run migrations, seed the database, and display the data.
 
-![Sample app homepage](https://docs.planetscale.com/img/docs/laravel-planetscale-example-data.png
+![Sample app homepage](https://docs.planetscale.com/img/docs/laravel-planetscale-example-data.png)
 
 For the full tutorial, see the [Laravel PlanetScale documentation](https://docs.planetscale.com/tutorials/connect-laravel-app).
 
