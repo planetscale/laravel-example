@@ -15,7 +15,7 @@ For the full tutorial, see the [Laravel PlanetScale documentation](https://docs.
 
 ## Set up the Laravel app
 
-1. Clone the starter Laravel application:
+1. Clone the starter Laravel 9 application:
 
 ```bash
 git clone https://github.com/planetscale/laravel-example.git
@@ -78,6 +78,8 @@ pscale password create <DATABASE_NAME> <BRANCH_NAME> <PASSWORD_NAME>
 ```
 
 > Note: `PASSWORD_NAME` represents the name of the username and password being generated. You can have multiple credentials for a branch, so this gives you a way to categorize them.
+
+The default branch created for you is called `main`.
 
 Take note of the values returned to you, as you won't be able to see them again.
 
