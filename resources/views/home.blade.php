@@ -35,7 +35,7 @@
             @if ($stars)
             <ul>
                 @foreach($stars as $star)
-                    <li>{{ $star->name }} is in constellation {{ $star->constellation }}.</li>
+                    <li>{{ $star->name }} is in constellation {{ $star->constellation->name }}.</li>
                 @endforeach
             </ul>
             @else 

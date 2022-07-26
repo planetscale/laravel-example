@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStarsTable extends Migration
+class CreateConstellationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateStarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stars', function (Blueprint $table) {
+        Schema::create('constellations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('constellation_id');
         });
     }
 
@@ -27,6 +26,6 @@ class CreateStarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stars');
+        Schema::dropIfExists('constellations');
     }
 }
