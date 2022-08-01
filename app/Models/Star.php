@@ -9,6 +9,11 @@ class Star extends Model
 
     protected $fillable = [
         'name',
-        'constellation',
+        'constellation_id',
     ];
+
+    public function constellation()
+    {
+        return $this->belongsTo(Constellation::class);
+    }
 }

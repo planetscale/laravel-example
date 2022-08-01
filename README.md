@@ -128,7 +128,13 @@ Refresh your Laravel homepage and you should see the message that you're connect
 
 ## Run migrations and seeder
 
-Now that you're connected, let's add some data to see it in action. The sample application comes with a migration file at `database/migrations/2021_12_20_194637_create_stars_table.php` that will create a `stars` table in the database. There's also a `database/seeders/StarSeeder.php` file that will add two rows to the `stars` table. Let's run those now.
+Now that you're connected, let's add some data to see it in action. The sample application comes with two migration files:
+
+- `database/migrations/2021_12_20_194637_create_stars_table.php` &mdash; Creates a `stars` table
+- `database/migrations/2021_12_20_194637_create_constellations_table.php` &mdash; Creates a `constellations` table
+
+
+There are also two seeders, `database/seeders/ConstellationSeeder.php` and `database/seeders/StarSeeder.php`, that will add two rows to the each table. Let's run those now.
 
 1. Make sure your database connection has been established. You'll see the message "You are connected to your-database-name" on the [Laravel app homepage](http://localhost:8000/) if everything is configured properly.
 
