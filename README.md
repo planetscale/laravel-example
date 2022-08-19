@@ -130,7 +130,7 @@ Refresh your Laravel homepage and you should see the message that you're connect
 
 Seeing a "_Your database is not connected._" message instead of a success message? There are multiple things to check
 
-1. Certificates: It is essential that the `MYSQL_ATTR_SSL_CA` variable in your `.env` file points to a list of valid SSL certificates. Please double check that `/etc/ssl/cert.pem` exists or that you point it to a valid destination (like `/etc/ssl/certs/ca-certificates.crt` if you are running on Ubuntu).
+1. Certificates: It is essential that the `MYSQL_ATTR_SSL_CA` variable in your `.env` file points to a list of valid SSL certificates. Please double check that `/etc/ssl/cert.pem` exists or that you point it to a valid destination (like `/etc/ssl/certs/ca-certificates.crt` if you are running on Ubuntu). Otherwise, you will see error messages like "_trying to connect via (null)_".
 
 2. Database name and state: Please double check that your database is not currently sleeping (and wake it up otherwise).
 
