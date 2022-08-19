@@ -27,6 +27,7 @@ class StarController extends Controller
                 $stars = [];
         } catch (\Exception $e) {
             $db_connected = false;
+            echo "Could not connect to database: " . $e->getMessage();
             $stars = [];
         }
 
