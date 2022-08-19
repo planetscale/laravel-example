@@ -126,6 +126,18 @@ The connection uses port `3306` by default, but if that's being used, it will pi
 
 Refresh your Laravel homepage and you should see the message that you're connected to your database!
 
+## Troubleshooting tips
+
+Seeing a "_Your database is not connected._" message instead of a success message? There are multiple things to check
+
+1. Certificates: It is essential that the `MYSQL_ATTR_SSL_CA` variable in your `.env` file points to a list of valid SSL certificates. Please double check that `/etc/ssl/cert.pem` exists or that you point it to a valid destination (like `/etc/ssl/certs/ca-certificates.crt` if you are running on Ubuntu).
+
+2. Database name and state: Please double check that your database is not currently sleeping (and wake it up otherwise).
+
+3. Check that necessary PHP MySQL libraries are installed
+
+If you are encountering error messages like "__could not find driver__", it is an indication that the necessary operating system package for PHP to connect to MySQL is not installed. Please install `php-mysql` or the equivalent package for your PHP distribution.
+
 ## Run migrations and seeder
 
 Now that you're connected, let's add some data to see it in action. The sample application comes with two migration files:
