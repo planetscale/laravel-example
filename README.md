@@ -2,14 +2,14 @@
 
 This sample application demonstrates how to connect to a PlanetScale MySQL database, run migrations, seed the database, and display the data.
 
-For the full tutorial, see the [Laravel PlanetScale documentation](https://docs.planetscale.com/tutorials/connect-laravel-app).
+For the full tutorial, see the [Laravel PlanetScale documentation](https://planetscale.com/docs/tutorials/connect-laravel-app).
 
 ## Prerequisites
 
 - [PHP](https://www.php.net/manual/en/install.php) &mdash; This tutorial uses `v8.1`
 - [Composer](https://getcomposer.org/)
 - A [free PlanetScale account](https://auth.planetscale.com/sign-up)
-- [PlanetScale CLI](https://github.com/planetscale/cli) &mdash; You can also follow this tutorial using just the PlanetScale admin dashboard, but the CLI will make setup quicker. For dashboard instructions, see [the full tutorial](https://docs.planetscale.com/tutorials/connect-laravel-app).
+- [PlanetScale CLI](https://github.com/planetscale/cli) &mdash; You can also follow this tutorial using just the PlanetScale admin dashboard, but the CLI will make setup quicker. For dashboard instructions, see [the full tutorial](https://planetscale.com/docs/tutorials/connect-laravel-app).
 
 ## Set up the Laravel app
 
@@ -168,6 +168,6 @@ The `resources/views/home.blade.php` file pulls this data from the `stars` table
 
 ## Need help?
 
-For more information about adding data, check out the full [Laravel PlanetScale documentation](https://docs.planetscale.com/tutorials/connect-laravel-app).
+For more information about adding data, check out the full [Laravel PlanetScale documentation](https://planetscale.com/docs/tutorials/connect-laravel-app).
 
 If you need further assistance, you can reach out to [PlanetScale's support team](https://www.planetscale.com/support), or join our [GitHub Discussion board](https://github.com/planetscale/beta/discussions) to see how others are using PlanetScale.
