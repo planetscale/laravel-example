@@ -156,7 +156,7 @@ There are also two seeders, `database/seeders/ConstellationSeeder.php` and `data
 php artisan migrate --seed
 ```
 
-4. Refresh your Laravel homepage and you'll see a list of stars and their constellations printed out.
+3. Refresh your Laravel homepage and you'll see a list of stars and their constellations printed out.
 
 The `resources/views/home.blade.php` file pulls this data from the `stars` table with the help of the `app/Http/Controllers/StarController.php` file.
 
