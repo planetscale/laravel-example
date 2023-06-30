@@ -13,7 +13,7 @@ For the full tutorial, see the [Laravel PlanetScale documentation](https://plane
 
 ## Set up the Laravel app
 
-1. Clone the starter Laravel 9 application:
+1. Clone the starter Laravel 10 application:
 
 ```bash
 git clone https://github.com/planetscale/laravel-example.git
@@ -26,11 +26,13 @@ cd laravel-example
 composer install
 ```
 
-3. Copy the `.env.example` file into `.env`:
+3. Copy the `.env.example` file into `.env` and generate the app key:
 
 ```bash
 cp .env.example .env
+php artisan key:generate
 ```
+
 
 4. Start the application:
 
@@ -148,19 +150,11 @@ There are also two seeders, `database/seeders/ConstellationSeeder.php` and `data
 
 1. Make sure your database connection has been established. You'll see the message "You are connected to your-database-name" on the [Laravel app homepage](http://localhost:8000/) if everything is configured properly.
 
-2. In the root of the Laravel project, run the following to run migrations:
+2. In the root of the Laravel project, run the following to migrate and seed the database:
 
 ```bash
-php artisan migrate
+php artisan migrate --seed
 ```
-
-3. Seed the database by running:
-
-```bash
-php artisan db:seed
-```
-
-You should get the message "Database seeding completed successfully".
 
 4. Refresh your Laravel homepage and you'll see a list of stars and their constellations printed out.
 
