@@ -16,7 +16,7 @@ class CreateStarsTable extends Migration
         Schema::create('stars', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('constellation_id');
+            $table->foreignId('constellation_id')->index();
         });
     }
 
